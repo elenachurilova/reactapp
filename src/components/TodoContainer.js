@@ -1,6 +1,7 @@
 import React from "react"
 import TodosList from "./TodosList"
 import Header from "./Header"
+import InputTodo from "./InputTodo"
 
 class TodoContainer extends React.Component {
 
@@ -8,27 +9,53 @@ class TodoContainer extends React.Component {
         todos: [
             {
                 id: 1,
-                title: "Setup sevelopment environment",
+                title: " Setup sevelopment environment",
                 completed: true
             },
             {
                 id: 2,
-                title: "Develop website and add content",
+                title: " Develop website and add content",
                 completed: false
             },
             {
                 id: 3,
-                title: "Deploy to live server",
+                title: " Deploy to live server",
                 completed: false
             }
         ]
+    };
+
+    handleChange = (id) => {
+        this.setState({
+            todos: this.state.todos.map(todo => {
+                if (todo.id === id) {
+                    todo.completed = !todo.completed;
+                }
+                return todo;
+            })
+        });
+    };
+
+    delTodo = id => {
+        this.setState({
+            todos: [
+                ...this.state.todos.filter(todo => {
+                    return todo.id !== id;
+                })
+            ]
+        });
     };
 
     render() {
         return (
             <React.Fragment>
                 <Header />
-                <TodosList todos={this.state.todos} />
+                <InputTodo />
+                <TodosList 
+                    todos={this.state.todos} 
+                    handleChangeProps={this.handleChange}
+                    deleteTodoProps={this.delTodo}
+                />
             </React.Fragment>
         )
     }
