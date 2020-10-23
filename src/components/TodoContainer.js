@@ -8,17 +8,17 @@ class TodoContainer extends React.Component {
     state = {
         todos: [
             {
-                id: 1,
+                id: Date.now(),
                 title: " Setup sevelopment environment",
                 completed: true
             },
             {
-                id: 2,
+                id: Date.now() + 1,
                 title: " Develop website and add content",
                 completed: false
             },
             {
-                id: 3,
+                id: Date.now() + 2,
                 title: " Deploy to live server",
                 completed: false
             }
@@ -46,11 +46,24 @@ class TodoContainer extends React.Component {
         });
     };
 
+    addTodoItem = title => {
+        const newTodo = {
+            id: Date.now(),
+            title: title,
+            completed: false
+        };
+        this.setState({
+            todos: [...this.state.todos, newTodo]
+        });
+    }
+
     render() {
         return (
             <React.Fragment>
                 <Header />
-                <InputTodo />
+                <InputTodo 
+                    addTodoProps={this.addTodoItem}
+                />
                 <TodosList 
                     todos={this.state.todos} 
                     handleChangeProps={this.handleChange}
