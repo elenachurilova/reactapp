@@ -3,6 +3,7 @@ import TodosList from "./TodosList"
 import Header from "./Header"
 import InputTodo from "./InputTodo"
 
+
 class TodoContainer extends React.Component {
 
     state = {
@@ -59,7 +60,7 @@ class TodoContainer extends React.Component {
 
     render() {
         return (
-            <React.Fragment>
+            <div className="container">
                 <Header />
                 <InputTodo 
                     addTodoProps={this.addTodoItem}
@@ -69,7 +70,7 @@ class TodoContainer extends React.Component {
                     handleChangeProps={this.handleChange}
                     deleteTodoProps={this.delTodo}
                 />
-            </React.Fragment>
+            </div>
         )
     }
 }
